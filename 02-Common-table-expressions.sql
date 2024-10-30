@@ -1,0 +1,1 @@
+-- https://www.ibm.com/docs/en/i/7.5?topic=queries-using-recursive-common-table-expressions-recursive-views
