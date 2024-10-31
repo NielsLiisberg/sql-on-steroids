@@ -4,12 +4,12 @@
 select * from sqlxxl.systables;
 select * from sqlxxl.employee;
 
--- Lets make a CTE
+-- Lets make a CTE that produce a full name from first, midt and last name.
 with emp_full_name as (
     select 
-        empno, 
-        rtrim(firstnme) concat ' ' concat midinit concat ' ' concat  lastname as full_name
-        from sqlxxl.employee
+        rtrim(firstnme) concat ' ' concat midinit concat ' ' concat  lastname as full_name,
+        a.*
+        from sqlxxl.employee a
 )
 select * from emp_full_name
 where full_name like '%JOHN%';

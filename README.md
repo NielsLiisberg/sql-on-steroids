@@ -9,14 +9,15 @@ With the time given I will cover as much as I can of:
  
 
 - Common Table Expressions
-- Regular expressions
 - Recursive SQL
+- Regular expressions
 - Compound statements
 - Stored procedures 
 - User defined Table Functions
 - JSON
 - XML
 - Service consuming
+- SELF SQL Exeptions Logging facility
 - SQL Services
 - SQL Triggers
 - SQL performance
