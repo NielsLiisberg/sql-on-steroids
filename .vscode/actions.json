@@ -1,0 +1,106 @@
+[
+  {
+    "name": "Create RPGLE Program",
+    "command": "CRTBNDRPG PGM(&CURLIB/&NAME) SRCSTMF('&RELATIVEPATH') OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTCCSID(*JOB)",
+    "deployFirst": true,
+    "environment": "ile",
+    "extensions": [
+      "RPGLE"
+    ]
+  },
+  {
+    "name": "Create RPGLE Module",
+    "command": "CRTRPGMOD MODULE(&CURLIB/&NAME) SRCSTMF('&RELATIVEPATH') OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTCCSID(*JOB)",
+    "deployFirst": true,
+    "environment": "ile",
+    "extensions": [
+      "RPGLE"
+    ]
+  },
+  {
+    "name": "Create SQLRPGLE Program",
+    "command": "CRTSQLRPGI OBJ(&CURLIB/&NAME) SRCSTMF('&RELATIVEPATH') OPTION(*EVENTF) DBGVIEW(*SOURCE) CLOSQLCSR(*ENDMOD) CVTCCSID(*JOB) COMPILEOPT('TGTCCSID(*JOB)') RPGPPOPT(*LVL2)",
+    "deployFirst": true,
+    "environment": "ile",
+    "extensions": [
+      "SQLRPGLE"
+    ]
+  },
+  {
+    "name": "Create SQLRPGLE Module",
+    "command": "CRTSQLRPGI OBJ(&CURLIB/&NAME) SRCSTMF('&RELATIVEPATH') OBJTYPE(*MODULE) OPTION(*EVENTF) DBGVIEW(*SOURCE) CLOSQLCSR(*ENDMOD) CVTCCSID(*JOB) COMPILEOPT('TGTCCSID(*JOB)') RPGPPOPT(*LVL2)",
+    "deployFirst": true,
+    "environment": "ile",
+    "extensions": [
+      "SQLRPGLE"
+    ]
+  },
+  {
+    "name": "Create C Program",
+    "command": "CRTBNDC PGM(&CURLIB/&NAME) SRCSTMF('&RELATIVEPATH') OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTCCSID(*JOB)",
+    "deployFirst": true,
+    "environment": "ile",
+    "extensions": [
+      "C"
+    ]
+  },
+  {
+    "name": "Create C Module",
+    "command": "CRTCMOD MODULE(&CURLIB/&NAME) SRCSTMF('&RELATIVEPATH') OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTCCSID(*JOB)",
+    "deployFirst": true,
+    "environment": "ile",
+    "extensions": [
+      "C"
+    ]
+  },
+  {
+    "extensions": [
+      "cmd"
+    ],
+    "name": "Create Command",
+    "command": "CRTCMD CMD(&CURLIB/&NAME) PGM(&CURLIB/&NAME) SRCSTMF('&RELATIVEPATH') OPTION(*EVENTF)",
+    "deployFirst": true,
+    "environment": "ile"
+  },
+  {
+    "extensions": [
+      "SQL",
+      "TABLE",
+      "VIEW",
+      "SQLPRC",
+      "SQLUDF",
+      "SQLUDT",
+      "SQLTRG",
+      "SQLALIAS",
+      "SQLSEQ"
+    ],
+    "name": "Run SQL Statements (RUNSQLSTM)",
+    "command": "RUNSQLSTM SRCSTMF('&FULLPATH') COMMIT(*NONE) NAMING(*SQL)",
+    "deployFirst": true,
+    "environment": "ile"
+  },
+  {
+    "name": "Build current with Source Orbit 🔨",
+    "command": "so -bf make -s &RELATIVEPATH && /QOpenSys/pkgs/bin/gmake LIBL='&LIBLS' BIN_LIB=&CURLIB OPT=*EVENTF",
+    "environment": "pase",
+    "deployFirst": true,
+    "extensions": [
+      "GLOBAL"
+    ],
+    "postDownload": [
+      ".evfevent/"
+    ]
+  },
+  {
+    "name": "Build entire project with Source Orbit 🔨",
+    "command": "so -bf make && /QOpenSys/pkgs/bin/gmake LIBL='&LIBLS' BIN_LIB=&CURLIB OPT=*EVENTF",
+    "environment": "pase",
+    "deployFirst": true,
+    "extensions": [
+      "GLOBAL"
+    ],
+    "postDownload": [
+      ".evfevent/"
+    ]
+  }
+]

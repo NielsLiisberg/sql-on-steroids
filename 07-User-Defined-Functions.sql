@@ -80,6 +80,31 @@ with emp_full_name as (
 )
 select * from emp_full_name;
 
+-- And perhaps make it a view:
+create or replace view sqlxxl.emp_full_name as (
+    select
+        empno, 
+        firstnme, 
+        midinit, 
+        lastname, 
+        sqlxxl.capitalize (rtrim(firstnme) concat ' ' concat midinit concat ' ' concat  lastname) as full_name,
+        workdept, 
+        phoneno, 
+        hiredate, 
+        job, 
+        edlevel, 
+        sex, 
+        birthdate, 
+        salary, 
+        bonus, 
+        comm 
+        from sqlxxl.employee
+);
+
+-- 
+select *
+from sqlxxl.emp_full_name;
+
 -- And to the advanced level - we can wrap API's and incelud C-code....
 -- Use MI to generarte a RFC 4122 compiant UUID / GUID 
 call qsys2.ifs_write(
@@ -155,8 +180,8 @@ call qsys2.ifs_write(
     dup2(stmf, STDOUT_FILENO);     
     dup2(stmf, STDERR_FILENO);     
 
-    BASH_CLOB.COMMAND.DAT[BASH_CLOB.COMMAND.LEN] = 0;
-    QP2SHELL ("/QOpenSys/pkgs/bin/bash" , "-c" , BASH_CLOB.COMMAND.DAT);
+    BASH.COMMAND.DAT[BASH.COMMAND.LEN] = 0;
+    QP2SHELL ("/QOpenSys/pkgs/bin/bash" , "-c" , BASH.COMMAND.DAT);
 
     close(stmf);
     stmf = open(tempname, O_RDONLY , 0600);
@@ -176,7 +201,7 @@ call qsys2.ifs_write(
 
 ');
 
-create or replace function sqlxxl.bash_clob (
+create or replace function sqlxxl.bash (
     command varchar(32000)
 ) 
 returns clob  ccsid 1208 
@@ -190,24 +215,22 @@ end;
 
 -- Usecases:
 ---------------------------------------------
-
 -- List content of the IFS users homedirectory
-values  sqlxxl.bash_clob ('cd /home;ls'); 
+values  sqlxxl.bash ('cd /home;ls'); 
 
 -- more readable:
-select * from table(systools.split (sqlxxl.bash_clob ('cd /home;ls'),x'25')); 
+select * from table(systools.split (sqlxxl.bash ('cd /home;ls'),x'25')); 
 
 
 -- ensure NLS works
-values  sqlxxl.bash_clob ('echo "æøå" '); 
+values  sqlxxl.bash ('echo "æøå" '); 
 
 -- No issues with multiple calls for each row
 select 
     authorization_name, 
     home_directory  , 
-    sqlxxl.bash_clob ('cd ' || home_directory || ';ls -xla') dir_list
+    sqlxxl.bash ('cd ' || home_directory || ';ls -xla') dir_list
 from qsys2.user_info;
-
 
 
 
