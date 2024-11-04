@@ -25,6 +25,7 @@ values sqlxxl.add (
 -- Note the "deterministic" or "not deterministic" or "statement deterministic"
 -- Note the "set option" for debugging
 -- Note the "specific" this is the service program name ( to debug)
+-- A great example to debug !!
 create or replace function sqlxxl.capitalize (
    name varchar(256)
 )  

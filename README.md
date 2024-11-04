@@ -18,10 +18,10 @@ With the time given I will cover as much as I can of:
 - JSON
 - XML
 - Service consuming
+- Geospatial 
 - SELF SQL Exeptions Logging facility
 - SQL Services
 - SQL Triggers
-- Geospatial 
 - SQL performance
 - Vector indexes
 - Visual explain

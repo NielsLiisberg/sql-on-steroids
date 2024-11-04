@@ -3,25 +3,21 @@
 -- Note: removal of mongo among others:
 -- https://www.ibm.com/docs/en/i/7.5?topic=changes-removal-db2-i-json-store-technology-preview
 ------------------------------------------------------------------------------
--- Step 6: UDTF User Defined Table Functions
--- Perhaps the usages of the function in the above could be more
--- usable if we provided is as a table function we can join into our SQL table:
--- Note: The "returns table" is the big difference here
 
 
+-- Let's get some JSON data:
 -- https://www.floatrates.com/
 -- http://www.floatrates.com/daily/dkk.json 
--- Note the new: qsys2.http_get: https://www.ibm.com/docs/en/i/7.5?topic=programming-http-functions-overview#rbafyhttpoverview/HTTP_SSL 
--- We will use the new: qsys2.http_get https://www.ibm.com/docs/en/i/7.5?topic=functions-http-get
+-- Note the "new": qsys2.http_get: https://www.ibm.com/docs/en/i/7.5?topic=programming-http-functions-overview#rbafyhttpoverview/HTTP_SSL 
+-- We will use the "new": qsys2.http_get https://www.ibm.com/docs/en/i/7.5?topic=functions-http-get
 -- To set up SSL: https://www.ibm.com/docs/en/i/7.5?topic=programming-http-functions-overview#rbafyhttpoverview__HTTP_SSL__title__1
 
 -- get the clob from the internet: 
 values qsys2.http_get ('http://www.floatrates.com/daily/dkk.json');
 
 -- You can still use the "old" Java version - 
--- But notice: You can only have ONE PASE envirinment open at the time in the job !!: 
+-- But notice: You can only have ONE PASE environment open at the time in the job !!: 
 values systools.httpGetClob ( url => 'http://www.floatrates.com/daily/dkk.json' , httpheader => NULL);
-
 
 
 -- Now - let's "normalize" to relationel data
@@ -73,7 +69,7 @@ end;
 select * from table  (sqlxxl.exchange_rates (from_currency => 'dkk'));
 select * from table  (sqlxxl.exchange_rates (from_currency => 'eur'));
 
--- Now the other way around - produce a JSON from relationel data:
+-- Now the other way arround - produce a JSON from relationel data:
 select * from sqlxxl.emp_full_name;
 
 values                               
