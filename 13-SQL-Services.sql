@@ -1,18 +1,27 @@
--- https://www.ibm.com/docs/en/i/7.5?topic=tools-sql-error-logging-facility-self
--- This can be done individually in all programs and procedures:
--- Start monitoring sqlcode  -901 SQL-systemfejl.
-set sysibmadm.selfcodes = sysibmadm.validate_self('-901'); -- SQL-systemfejl.
+-- SQL Services:
+-- https://www.ibm.com/docs/en/i/7.5?topic=optimization-i-services
 
--- Now logging will occur in this table:
-select * from qsys2.sql_error_log;
+-- My favorite "goto guy"
+select * from qsys2.services_info;
 
--- Can I use the general '*ERROR' on this version of the OS?
-values sysibmadm.validate_self('*ERROR');
+-- Anything with IFS
+select * from qsys2.services_info where service_name like '%IFS%';
 
--- If it responds '*ERROR' it means the self-code is valid
--- so I can use this instead of the list
--- Now!! by setting this variable - it will be system-wide
-create or replace variable sysibmadm.selfcodes varchar(256) default '*ERROR';
+-- and then use the example of the service:
+select example from qsys2.services_info where service_name like '%IFS%';
 
--- else I have to supply a list:
-create or replace variable sysibmadm.selfcodes varchar(256) default '551, 552, -551, -552, 901, -901';
+-- .. copy / paste and modify from the example column:
+
+-- Description: List basic information for all the objects in directory /usr. 
+SELECT PATH_NAME, OBJECT_TYPE, DATA_SIZE, OBJECT_OWNER 
+FROM TABLE (QSYS2.IFS_OBJECT_STATISTICS(START_PATH_NAME => '/home/nli', SUBTREE_DIRECTORIES => 'YES')); -- Description: List basic information for all the objects in /usr, processing all -- subdirectories as well. SELECT PATH_NAME, OBJECT_TYPE, DATA_SIZE, OBJECT_OWNER FROM TABLE (QSYS2.IFS_OBJECT_STATISTICS(START_PATH_NAME => '/usr', SUBTREE_DIRECTORIES => 'YES'));
+
+
+-- Description: Read the data from stream file /usr/file1. Break lines when a carriage -- return/line feed sequence is encountered. The result will be in the job's CCSID. 
+SELECT line FROM TABLE(QSYS2.IFS_READ(PATH_NAME => '/home/nli/.viminfo', END_OF_LINE => 'LF'));
+
+-- Or use "Insert from examples"
+
+-- Or look into my "gist"
+-- https://www.ibm.com/docs/en/i/7.5?topic=is-ifs-write-ifs-write-binary-ifs-write-utf8-procedures
+-- https://gist.github.com/NielsLiisberg/3a5ea6d03687310f877ec65a7748e196
