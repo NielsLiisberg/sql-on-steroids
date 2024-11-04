@@ -7,9 +7,11 @@ call qsys.create_sql_sample ('SQLXXL');
 set schema sqlxxl;
 
 -- Now you can use it qualified or unqualified
-select * from sqlxxl.systables;
-select * from systables;
+select * from sqlxxl.systables where table_type = 'T';
+select * from systables        where table_type = 'T'; 
 
 
 select * from employee;
 select * from sqlxxl.employee;
+
+select * from sqlxxl.org;

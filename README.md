@@ -7,12 +7,13 @@ From a simple database that handles only tables, columns and
 rows to a complete ecosystem of structured and unstructured data and even procedural programming.
 With the time given I will cover as much as I can of:
  
-
+- Build a sample schema 
 - Common Table Expressions
 - Recursive SQL
 - Regular expressions
 - Compound statements
 - Stored procedures 
+- User defined Functions 
 - User defined Table Functions
 - JSON
 - XML
@@ -20,6 +21,7 @@ With the time given I will cover as much as I can of:
 - SELF SQL Exeptions Logging facility
 - SQL Services
 - SQL Triggers
+- Geospatial 
 - SQL performance
 - Vector indexes
 - Visual explain
