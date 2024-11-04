@@ -108,26 +108,28 @@ select * from sqlxxl.exchange_rates_dkk;
 
 
 
--- Now the other way around - produce a JSON from relationel data:
+-- Now the other way around - produce a XML from relationel data:
 select * from sqlxxl.emp_full_name;
 
-values                               
-    json_array(                          
-        (
-            select json_object(
-                'employeeNumber' : int(empno),
-                'employeeName'   : full_name,
-                'workDepartment' : workdept,
-                'phoneNumber'    : phoneno,
-                'hireDate'       : hiredate,
-                'jobTitle'       : job,
-                'educationLevel' : edlevel,
-                'sex'            : case when sex='M' then 'Male' when sex='F' then 'Female' else 'Other' end ,
-                'birthDate'      : birthdate,
-                'salary'         : salary,
-                'bonus'          : bonus,
-                'commission'     : comm
+
+values   
+    xmlelement ( name "root" , (
+        Select 
+            xmlagg( 
+                xmlelement ( name "row", 
+                    xmlelement ( name "employeeNumber" , int(empno)),
+                    xmlelement ( name "employeeName"   , full_name),
+                    xmlelement ( name "workDepartment" , workdept),
+                    xmlelement ( name "phoneNumber"    , phoneno),
+                    xmlelement ( name "hireDate"       , hiredate),
+                    xmlelement ( name "jobTitle"       , rtrim(job)),
+                    xmlelement ( name "educationLevel" , edlevel),
+                    xmlelement ( name "sex"            , case when sex='M' then 'Male' when sex='F' then 'Female' else 'Other' end ),
+                    xmlelement ( name "birthDate"      , birthdate),
+                    xmlelement ( name "salary"         , salary),
+                    xmlelement ( name "bonus"          , bonus),
+                    xmlelement ( name "commission"     , comm)
+                ) order by empno
             )
-            from sqlxxl.emp_full_name order by empno
-        ) format json                       
-    );
+        from sqlxxl.emp_full_name 
+    ));
