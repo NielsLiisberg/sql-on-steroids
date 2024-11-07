@@ -15,3 +15,6 @@ select * from employee;
 select * from sqlxxl.employee;
 
 select * from sqlxxl.org;
+
+select * from sqlxxl.systables;
+select * from sqlxxl.SYSREFCST;
