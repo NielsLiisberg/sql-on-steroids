@@ -14,7 +14,7 @@ order by ordinal_position desc;
 -- a program in QTEMP is created :) 
 
 -- Lets do something usefull - Clean up joblogs:
--- Lets first create a bunch of joblogs:
+-- Lets first create a bunch of dummy joblogs:
 begin   
     declare i int default 0;
     while i < 10 do

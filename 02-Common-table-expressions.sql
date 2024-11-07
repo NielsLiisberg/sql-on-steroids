@@ -1,7 +1,8 @@
 -- https://www.ibm.com/docs/en/i/7.5?topic=queries-using-recursive-common-table-expressions-recursive-views
 
 -- This is what we can work with:
-select * from sqlxxl.systables;
+select * from sqlxxl.systables where table_type = 'T';
+
 select * from sqlxxl.employee;
 
 -- Lets make a CTE that produce a full name from first, midt and last name.

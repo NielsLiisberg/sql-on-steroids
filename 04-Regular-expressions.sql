@@ -11,10 +11,6 @@ select * from sqlxxl.employee;
 -- regexp_like      https://www.ibm.com/docs/en/i/7.5?topic=predicates-regexp-like-predicate
 
 
--- INITCAP - This would be nice!
--- values initcap  ('ABC');
--- https://www.ibm.com/docs/en/db2/11.1?topic=functions-initcap
-
 -- https://regex101.com/
 values regexp_replace ('ABCDEFG' , 'ABC' ,'abc'); 
 values regexp_replace ('AMOUNT:  123,456.78 $' , '[^0-9\.]', '');
@@ -25,7 +21,7 @@ values regexp_instr ( 'john@gmail.cdrom' ,'^[a-zA-Z0-9-]+@[a-zA-Z0-9-]+\.[a-zA-Z
 values regexp_instr ( 'john@gmail.c'     ,'^[a-zA-Z0-9-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$');
 values regexp_instr ( 'john@gmail-com'   ,'^[a-zA-Z0-9-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$');
 
--- Or simpler:
+-- Or simpler, but more sluppy:
 values regexp_instr ( 'john@gmail.com'   ,'^\S+@\S+\.\S+$');
 
 

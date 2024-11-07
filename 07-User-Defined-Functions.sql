@@ -1,5 +1,5 @@
 -- https://www.ibm.com/docs/en/i/7.5?topic=statements-create-function-sql-scalar
--- Functions ( scalar functions) returns one values based on zero or more parameters:
+-- Functions ( scalar functions) returns one value based on zero or more parameters:
 create or replace function sqlxxl.add  (
    x int,
    y int 
@@ -12,7 +12,7 @@ end;
 -- So simple - does it work?
 values sqlxxl.add ( 1 , 3 );
 
--- always use qualified where possible:
+-- always use qualified named parameter where possible:
 values sqlxxl.add ( x=>1 , y=>3 );
 
 -- and parameters can arrive from another SQL statement
@@ -81,7 +81,7 @@ with emp_full_name as (
 )
 select * from emp_full_name;
 
--- And perhaps make it a view - only expsing the full name:
+-- And perhaps make it a view - only exposing the full name:
 create or replace view sqlxxl.emp_full_name as (
     select
         empno, 

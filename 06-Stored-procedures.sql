@@ -24,6 +24,7 @@ begin
 end; 
 
 -- Does it work ? 
+-- Note: Named and unnamed paramter ALWAYS use named parameter
 call sqlxxl.produce_some_joblogs (
     number_of_joblogs => 2
 );
