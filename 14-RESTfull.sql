@@ -33,7 +33,7 @@ comment on column sqlxxl.services_info.service_name  is 'Find services by name @
 -- Now our employee table: noxDbApi will only expose views for safty reasons:
 create or replace view sqlxxl.employee_view  as 
     select * from sqlxxl.employee;
-comment on table  sqlxxl.employee_view         is 'Employees  @Endpoint=employee @Method=GET,PUT,POST,DELETE';
+comment on table  sqlxxl.employee_view         is 'Employees  @Endpoint=employee @Method=GET';
 comment on column sqlxxl.employee_view.empno   is 'Find employee employee number  @Location=PATH,1';
 
 -- Does it work? 
