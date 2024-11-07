@@ -81,13 +81,10 @@ with emp_full_name as (
 )
 select * from emp_full_name;
 
--- And perhaps make it a view:
+-- And perhaps make it a view - only expsing the full name:
 create or replace view sqlxxl.emp_full_name as (
     select
         empno, 
-        firstnme, 
-        midinit, 
-        lastname, 
         sqlxxl.capitalize (rtrim(firstnme) concat ' ' concat midinit concat ' ' concat  lastname) as full_name,
         workdept, 
         phoneno, 
@@ -151,8 +148,8 @@ values sqlxxl.uuid  ();
 -- Is it non deterministic? 
 select 
     sqlxxl.uuid() uuid,
-    firstnme
-from sqlxxl.employee;
+    full_name
+from sqlxxl.emp_full_name;
 
 
 -- and this is usefull too: BASH!! 

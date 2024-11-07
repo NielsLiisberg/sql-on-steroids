@@ -133,3 +133,29 @@ values
             )
         from sqlxxl.emp_full_name 
     ));
+
+
+-- More correct: As a CLOB field with the prolog:
+values  xmlserialize (
+    xmlelement ( name "root" , (
+        Select 
+            xmlagg( 
+                xmlelement ( name "row", 
+                    xmlelement ( name "employeeNumber" , int(empno)),
+                    xmlelement ( name "employeeName"   , full_name),
+                    xmlelement ( name "workDepartment" , workdept),
+                    xmlelement ( name "phoneNumber"    , phoneno),
+                    xmlelement ( name "hireDate"       , hiredate),
+                    xmlelement ( name "jobTitle"       , rtrim(job)),
+                    xmlelement ( name "educationLevel" , edlevel),
+                    xmlelement ( name "sex"            , case when sex='M' then 'Male' when sex='F' then 'Female' else 'Other' end ),
+                    xmlelement ( name "birthDate"      , birthdate),
+                    xmlelement ( name "salary"         , salary),
+                    xmlelement ( name "bonus"          , bonus),
+                    xmlelement ( name "commission"     , comm)
+                ) order by empno
+            )
+        from sqlxxl.emp_full_name 
+    ))
+    as clob(1g) ccsid 1208 including xmldeclaration
+);
