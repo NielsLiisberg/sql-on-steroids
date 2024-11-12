@@ -26,3 +26,4 @@ With the time given I will cover as much as I can of:
 - Vector indexes
 - Visual explain
 - The system debugger
+- Temporal support
