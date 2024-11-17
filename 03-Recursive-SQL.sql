@@ -29,9 +29,9 @@ dep as (
     order siblings by deptno 
 )
 select * from dep
-where deptno = 'G22'
 -- We will see both direct and transitive connections. 
 -- Therefor apply this:
+-- where deptno = 'G22'
 -- order by dep_level desc
 -- limit 1
 ; 
