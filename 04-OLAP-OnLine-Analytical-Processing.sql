@@ -36,7 +36,7 @@ select
     amount,
     sum(amount) over (
         partition by account_id   
-        order by account_id ,transaction_Date
+        order by account_id ,transaction_Date -
     ) as total
 from sqlxxl.account_transactions
 order by account_id ,transaction_Date;
@@ -69,7 +69,8 @@ select
     account_id,
     transaction_Date,
     amount,
-    lag (amount) over(order by account_id ,transaction_Date ) prev_amount
+    lag (amount) over(order by account_id ,transaction_Date ) prev_amount,
+    lead (amount) over(order by account_id ,transaction_Date ) next_amount
 from sqlxxl.account_transactions
 order by account_id ,transaction_Date;
 
