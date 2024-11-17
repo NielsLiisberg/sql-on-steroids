@@ -19,6 +19,12 @@ insert into sqlxxl.account_transactions values
 (  2 , 3 , '2024-08-01' , 2345),
 (  2 , 4 , '2024-08-01' , 2356);
 
+-- simple  - number of rows wil OLAP
+select 
+    count(*) over() total_rows,
+    ac.* 
+from sqlxxl.account_transactions ac;
+
 
 -- Windowed OLAP commulative sum  
 select
@@ -184,3 +190,5 @@ select
 from sqlxxl.employee
 where workdept = 'D11'
 order by salary;
+
+
