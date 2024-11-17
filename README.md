@@ -28,3 +28,6 @@ With the time given I will cover as much as I can of:
 - The system debugger
 - Temporal support
 - OLAP, OnLine Analytical Processing
+
+Have fun 
+(C) Niels Liisberg 2024

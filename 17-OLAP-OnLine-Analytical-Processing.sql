@@ -56,7 +56,7 @@ group by grouping sets(
 order by account_id ,transaction_id;
 
 
--- LAG
+-- LAG/LEAD
 select
     account_id,
     transaction_Date,
@@ -76,27 +76,27 @@ select
     count(*)      over(partition by account_id ) counter , -- number of rows in each group  
     dense_rank () over(order by account_id desc) group_id , -- unique id number pr group
     ntile(100)    over(order by account_id desc) n_tile, -- number of rows divided with ntile parameter. here 100 
-    row_number()  over () row_number_value
+    row_number()  over() row_no
 from sqlxxl.account_transactions
 order by account_id ,transaction_Date;
 
 
--- Next level: From the IBM documentation
------------------------------------------ 
+-- Next level: Similar to the IBM documentation
+----------------------------------------------- 
 select 
     empno, 
     salary, 
-    rank() over(order by salary desc),
-    dense_rank() over(order by salary desc),
-    row_number() over(order by salary desc)  
+    rank()       over(order by salary desc) rank_with_gaps,
+    dense_rank() over(order by salary desc) rank_without_gaps,
+    row_number() over(order by salary desc) row_no  
 from sqlxxl.employee
 fetch first 10 rows only;
 
 select 
     workdept, 
     int(avg(salary)) as average, 
-    rank() over(order by avg(salary) desc) as avg_salary, 
-    ntile(3) over(order by avg(salary) desc) as quantile 
+    rank()   over(order by avg(salary) desc) avg_salary, 
+    ntile(3) over(order by avg(salary) desc) quantile 
 from sqlxxl.employee 
 group by  workdept; 
 
@@ -104,12 +104,15 @@ select
     lastname, 
     workdept, 
     bonus, 
-    dense_rank() over(partition by workdept order by bonus desc) as bonus_rank_in_dept 
+    dense_rank() over(
+        partition by workdept 
+        order by bonus desc
+    ) bonus_rank_in_dept 
 from sqlxxl.employee
 where workdept like 'E%';
 
 select 
-    row_number() over(order by order of emp),
+    row_number() over(order by order of emp) row_no,
     empno, 
     salary, 
     deptno, 
@@ -127,21 +130,21 @@ where deptno = workdept;
 
 
 select 
-    row_number() over() as row, 
+    row_number() over() row_no, 
     lastname, 
     salary,
     sum(salary) over(
         order by salary 
         range between unbounded preceding and current row
-    ) as rolling_total_range,
+    ) rolling_total_range,
     sum(salary) over(
         order by salary 
         rows between unbounded preceding and current row
-    ) as rolling_total_rows,
+    ) rolling_total_rows,
    decimal(
     cume_dist() over (order by salary)
     ,4,3
-    ) as distribution
+    ) distribution
 from  sqlxxl.employee
 where workdept = 'D11'
 order by salary;
@@ -149,19 +152,21 @@ order by salary;
 select 
     lastname, 
     salary,
-    sum(salary) over(order by salary) as rolling_total, 
+    sum(salary) over(
+        order by salary
+    ) rolling_total, 
     sum(salary) over(
         order by salary 
         range between 1000 preceding and 1000 following
-    ) as windowed_total,
+    ) windowed_total,
     first_value(salary) over(
         order by salary 
         range between 1000 preceding and 1000 following
-    ),
+    ) first_value,
     last_value(salary) over(
         order by salary 
         range between 1000 preceding and 1000 following
-    )
+    ) last_value
 from sqlxxl.employee
 where workdept = 'D11'
 order by salary;
@@ -175,7 +180,7 @@ select
             order by salary 
             rows between 1 preceding and 1 following
         ), 7,2
-    ) as avg_salary
+    ) avg_salary
 from sqlxxl.employee
 where workdept = 'D11'
 order by salary;
