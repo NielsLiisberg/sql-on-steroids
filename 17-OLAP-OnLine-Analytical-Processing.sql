@@ -12,14 +12,16 @@ create or replace  table sqlxxl.account_transactions (
 );
 insert into sqlxxl.account_transactions values 
 (  1 , 1 , '2024-06-01' , 1123),
-(  1 , 2 , '2024-07-01' , 1234),
-(  1 , 3 , '2024-08-01' , 1345),
+(  1 , 2 , '2024-07-02' , 1234),
+(  1 , 3 , '2024-08-03' , 1345),
 (  2 , 1 , '2024-06-01' , 2123),
-(  2 , 2 , '2024-07-01' , 2234),
-(  2 , 3 , '2024-08-01' , 2345),
-(  2 , 4 , '2024-08-01' , 2356);
+(  2 , 2 , '2024-07-02' , 2234),
+(  2 , 3 , '2024-08-03' , 2345),
+(  2 , 4 , '2024-09-04' , 2456);
 
--- simple  - number of rows wil OLAP
+-- First simple:  - number of rows wil OLAP
+-- Normally count(*) is "group" function and can not be combined with scalar data
+-- With OLAP you can - notice the "over()" that is the magic 
 select 
     count(*) over() total_rows,
     ac.* 
