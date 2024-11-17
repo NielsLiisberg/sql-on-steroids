@@ -27,4 +27,4 @@ With the time given I will cover as much as I can of:
 - Visual explain
 - The system debugger
 - Temporal support
-- OnLine Analytical Processing
+- OLAP, OnLine Analytical Processing
