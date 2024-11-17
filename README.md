@@ -33,5 +33,11 @@ With the time given I will cover as much as I can of:
 - Visual explain
 - The system debugger
 
+# Install
+This project do not have any special buil routines. So simply clone or download the zip, and open the files one by one in ACS or VSCode to runn the examples 
+
+This repo is distributed on an "as is" basis, without warranties or conditions of any kind, either express or implied.
+
 Have fun 
+
 (C) Niels Liisberg 2024
