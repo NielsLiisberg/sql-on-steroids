@@ -21,7 +21,7 @@ values regexp_instr ( 'john@gmail.cdrom' ,'^[a-zA-Z0-9-]+@[a-zA-Z0-9-]+\.[a-zA-Z
 values regexp_instr ( 'john@gmail.c'     ,'^[a-zA-Z0-9-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$');
 values regexp_instr ( 'john@gmail-com'   ,'^[a-zA-Z0-9-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$');
 
--- Or simpler, but more sluppy:
+-- Or simpler, but more sloppy:
 values regexp_instr ( 'john@gmail.com'   ,'^\S+@\S+\.\S+$');
 
 

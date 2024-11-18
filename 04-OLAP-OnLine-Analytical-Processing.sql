@@ -69,22 +69,22 @@ select
     account_id,
     transaction_Date,
     amount,
-    lag (amount) over(order by account_id ,transaction_Date ) prev_amount,
+    lag  (amount) over(order by account_id ,transaction_Date ) prev_amount,
     lead (amount) over(order by account_id ,transaction_Date ) next_amount
 from sqlxxl.account_transactions
 order by account_id ,transaction_Date;
 
 
-
+-- all "usefull" OLAP's 
 select 
     account_id ,
     transaction_Date ,
     amount,
-    lag  (amount) over(order by account_id ,transaction_Date ) prev_amount,
-    lead (amount) over(order by account_id ,transaction_Date ) next_amount,
-    count(*)      over(partition by account_id ) counter , -- number of rows in each group  
+    lag  (amount) over(partition by account_id order by account_id ,transaction_Date ) prev_amount,
+    lead (amount) over(partition by account_id order by account_id ,transaction_Date ) next_amount,
+    count(*)      over(partition by account_id ) counter  , -- number of rows in each group  
     dense_rank () over(order by account_id desc) group_id , -- unique id number pr group
-    ntile(100)    over(order by account_id desc) n_tile, -- number of rows divided with ntile parameter. here 100 
+    ntile(100)    over(order by account_id desc) n_tile   , -- number of rows divided with ntile parameter. here 100 
     row_number()  over() row_no
 from sqlxxl.account_transactions
 order by account_id ,transaction_Date;
@@ -150,9 +150,9 @@ select
         order by salary 
         rows between unbounded preceding and current row
     ) rolling_total_rows,
-   decimal(
-    cume_dist() over (order by salary)
-    ,4,3
+    decimal(
+        cume_dist() over (order by salary)
+        ,4,3
     ) distribution
 from  sqlxxl.employee
 where workdept = 'D11'

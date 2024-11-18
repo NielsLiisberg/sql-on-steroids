@@ -6,7 +6,6 @@
 
 
 -- Let's get some JSON data:
--- https://www.floatrates.com/
 -- http://www.floatrates.com/daily/dkk.json 
 -- Note the "new": qsys2.http_get: https://www.ibm.com/docs/en/i/7.5?topic=programming-http-functions-overview#rbafyhttpoverview/HTTP_SSL 
 -- We will use the "new": qsys2.http_get https://www.ibm.com/docs/en/i/7.5?topic=functions-http-get

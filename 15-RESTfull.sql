@@ -3,7 +3,11 @@
 
 -- and use the 'sql-on-steroids.xml' config
 cl:addlible icebreak;
-cl:ADDICESVR SVRID(NOXDBAPI) TEXT('Views as webservices') SVRPORT(7007) HTTPPATH('/prj/noxdbAPI') WWWDFTDOC('index.html') WEBCONFIG('webConfig-sql-on-steroids.xml'); 
+cl:ADDICESVR SVRID(NOXDBAPI) 
+    TEXT('Views as webservices') 
+    SVRPORT(7007) HTTPPATH('/prj/noxdbAPI') 
+    WWWDFTDOC('index.html') 
+    WEBCONFIG('webConfig-sql-on-steroids.xml'); 
 cl:STRICESVR SVRID(noxDbAPI);
 
 -- Compile the noxDbAPI router code:

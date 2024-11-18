@@ -1,3 +1,5 @@
+-- https://www.ibm.com/docs/en/i/7.3?topic=pl-compound-statement
+
 -- A sigle statment
 call systools.lprintf ('Hello world');
 

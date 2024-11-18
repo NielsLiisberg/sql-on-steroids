@@ -1,4 +1,4 @@
-
+﻿
 -- Geospatial-Functions
 -- https://www.ibm.com/docs/en/i/7.5?topic=analytics-geospatial-functions
 -- https://developers.google.com/maps/documentation/urls/get-started#map-action
@@ -37,7 +37,7 @@ values real(regexp_substr ( qsys2.st_astext(sqlxxl.my_location) ,'(POINT \()([0-
 values real(regexp_substr ( qsys2.st_astext(sqlxxl.my_location) ,'(POINT \()([0-9.-]*) ([0-9.-]*)',1,1,'c',3));
 
 
--- Pout this in a function to return a google map's link:
+-- Put this in a function to return a google map's link:
 create or replace function sqlxxl.google_maps_link ( 
     geo_location qsys2.st_point
 )
@@ -60,7 +60,8 @@ end;
 -- Does it work? 
 values sqlxxl.google_maps_link(sqlxxl.my_location);
 
--- Not put up a link to all out branch offices:
+
+-- Now put up a link to all our branch offices:
 select 
     deptnumb, 
     deptname, 
@@ -70,7 +71,7 @@ select
     sqlxxl.google_maps_link (location_point) link  
 from sqlxxl.org;
 
--- Caclulate distancs between all out brancheoffices
+-- Caclulate distancs between all our brancheoffices
 select 
     a.location , 
     b.location ,
