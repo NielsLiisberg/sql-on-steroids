@@ -21,7 +21,7 @@ With the time given I will cover as much as I can of:
 - JSON
 - XML
 - Service consuming
-- SELF SQL Exeptions Logging facility
+- SELF SQL Exceptions Logging facility
 - SQL Services
 - RESTfull
 - SQL Triggers
