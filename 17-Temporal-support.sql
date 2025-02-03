@@ -16,7 +16,7 @@ create or replace table sqlxxl.departmnt(
 create or replace table sqlxxl.departmnt_hist like sqlxxl.departmnt;
 
 
-alter table sqlxxl.departmnt add versioning use history table department_hist;
+alter table sqlxxl.departmnt add versioning use history table sqlxxl.department_hist;
 
 select * from sqlxxl.departmnt for system_time as of current timestamp - 6 months;
 
@@ -37,7 +37,7 @@ create or replace table sqlxxl.departmnt (
       primary key (deptno)
 );
 
-create or replace table sqlxxl.departmnt_hist like department;
+create or replace table sqlxxl.departmnt_hist like sqlxxl.department;
 
 
 select * from sqlxxl.departmnt for system_time as of current timestamp - 6 months;
