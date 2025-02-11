@@ -44,7 +44,7 @@ and user_data = 'SQLXXL';
 -- 2) columns are scoped within the loop aka. you don't need to declare them
 -- 3) Each row from the reultset is exposed in the loop to let you do what ever  
 create or replace procedure sqlxxl.delete_joblogs  (
-    in user_data char(10) default 'SQLXXL' -- Be carefull with this !! 
+    in days_to_keep int default 7 
 ) 
     specific DLTJOBLOGS  -- this i the program name, when we debug it
     language sql
@@ -56,7 +56,7 @@ begin
         select *
         from   qsys2.output_queue_entries_basic outq
         where  output_queue_name = 'QEZJOBLOG'
-        and    outq.user_data = delete_joblogs.user_data
+        and    create_timestamp < now() - days_to_keep days 
     do
         call qcmdexc('DLTSPLF FILE(' || spooled_file_name || ') JOB(' || job_name || ') SPLNBR(' ||  file_number || ')');
     end for;
@@ -64,11 +64,11 @@ end;
 
 -- does it work
 call sqlxxl.delete_joblogs  (
-    user_data => 'SQLXXL' 
+    days_to_keep => 14 
 );
-
--- Also with out parameters ? does it work
+-- Also without parameters? does it work
 call sqlxxl.delete_joblogs  ();
+
 
 
 

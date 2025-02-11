@@ -21,9 +21,15 @@ begin
     -- NOTE: old_row.empno is the original row found - you will update
     if UPDATING then 
         update sqlxxl.employee
-        set  FIRSTNME = upper(sqlxxl.word(new_row.FULL_NAME , 1)) ,
-             MIDINIT  = upper(sqlxxl.word(new_row.FULL_NAME , 2)) ,
-             LASTNAME = upper(sqlxxl.word(new_row.FULL_NAME , 3)) 
+        set  firstnme = upper(regexp_substr(
+                            new_row.full_name,
+                            '^(\w+)'
+                        )),
+             midinit  = upper(sqlxxl.word(new_row.full_name , 2)),
+             lastname = upper(regexp_substr(
+                            new_row.full_name,
+                            '(\w+)$'
+                        ))
         where empno  = old_row.empno;
            
     -- Update only allows you to chane the name: 
@@ -39,9 +45,15 @@ begin
                                       , '000000'
                                     )
                                ), 
-            /* firstnme = */  upper(sqlxxl.word(new_row.FULL_NAME , 1)) ,
-            /* midinit  = */  upper(sqlxxl.word(new_row.FULL_NAME , 2)) ,
-            /* lastname = */  upper(sqlxxl.word(new_row.FULL_NAME , 3)) ,
+            /* firstnme = */  upper(regexp_substr(
+                                    new_row.full_name,
+                                    '^(\w+)'
+                              )) ,
+            /* midinit  = */  upper(sqlxxl.word(new_row.full_name , 2)) ,
+            /* lastname = */  upper(regexp_substr(
+                                    new_row.full_name,
+                                    '(\w+)$'
+                              )),
             /* workdept = */  new_row.workdept ,
             /* phoneno  = */  new_row.phoneno ,
             /* hiredate = */  new_row.hiredate ,

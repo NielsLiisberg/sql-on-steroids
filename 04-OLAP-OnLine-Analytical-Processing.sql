@@ -36,7 +36,7 @@ select
     amount,
     sum(amount) over (
         partition by account_id   
-        order by account_id ,transaction_Date -
+        order by account_id ,transaction_Date 
     ) as total
 from sqlxxl.account_transactions
 order by account_id ,transaction_Date;
