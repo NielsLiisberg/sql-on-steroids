@@ -12,6 +12,8 @@ select * from sqlxxl.employee;
 
 
 -- https://regex101.com/
+-- ChatGPT_4.0 can also help with regex, but it is not always correct.
+-- make a regex to filter out all non-numeric exept decimal poins and signs characters from a string usin SQL regexp_replace in Db2 for i
 values regexp_replace ('ABCDEFG' , 'ABC' ,'abc'); 
 values regexp_replace ('AMOUNT:  123,456.78 $' , '[^0-9\.]', '');
 

@@ -105,7 +105,7 @@ select
     workdept, 
     int(avg(salary)) as average, 
     rank()   over(order by avg(salary) desc) avg_salary, 
-    ntile(3) over(order by avg(salary) desc) quantile 
+    ntile(3) over(order by avg(salary) desc) quantile -- Here 3 quantiles: Hight, Medium and Low
 from sqlxxl.employee 
 group by  workdept; 
 

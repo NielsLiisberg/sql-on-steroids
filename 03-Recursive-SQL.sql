@@ -21,7 +21,7 @@ dep as (
     from  sqlxxl.department a
     -- the "key" to the top - here "A00" - sometimes that is a NULL
     start with admrdept = 'A00'
-    -- No cycle: 'A00' has 'A00' as parent so it would elisewise loop
+    -- No cycle: 'A00' has 'A00' as parent so it would elsewise loop infinite.
     -- "prior" on left side it top-down.
     -- "prior" on right side it bottom-up.
     connect by nocycle  prior deptno =  admrdept
