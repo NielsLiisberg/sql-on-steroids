@@ -12,10 +12,16 @@ select * from sqlxxl.employee;
 
 
 -- https://regex101.com/
--- ChatGPT_4.0 can also help with regex, but it is not always correct.
--- make a regex to filter out all non-numeric exept decimal poins and signs characters from a string usin SQL regexp_replace in Db2 for i
 values regexp_replace ('ABCDEFG' , 'ABC' ,'abc'); 
 values regexp_replace ('AMOUNT:  123,456.78 $' , '[^0-9\.]', '');
+
+-- AI (ChatGPT) can also help with regex, but it is not always correct.
+/* 
+make a regex to filter out all non-numeric exept decimal poins and signs 
+characters from a string usin SQL regexp_replace in Db2 for i using this 
+string 'AMOUNT:  123,456.78 $' and sql "values" statement. sql in lower case.
+*/
+values regexp_replace('AMOUNT:  123,456.78 $', '[^0-9+\-.]+', '');
 
 -- regexp_instr 1=Email OK , 0=Email not valid 
 values regexp_instr ( 'john@gmail.com'   ,'^[a-zA-Z0-9-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$');

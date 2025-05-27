@@ -116,7 +116,7 @@ call qsys2.ifs_write(
 
     memset  (&ut , 0, sizeof(ut));
     ut.bytesProv = sizeof(ut);
-    // ut.version = 4; --from version 7.5 this is default
+    //ut.version = 4; --from version 7.5 this is default
 
     _GENUUID (&ut);
     memcpy (MAIN.UUID , ut.uuid , sizeof(ut.uuid));

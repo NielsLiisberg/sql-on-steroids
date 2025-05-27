@@ -1,5 +1,21 @@
 -- Exposing restfull services using noxDbApi
+
+-- https://install.icebreak.org
+
+begin
+    declare buf blob(2G);
+    set buf = systools.httpgetblob (url => 'https://webfiles.system-method.com/download/IceBreak/savf/IceBreak-0783.savf', httpheader => null);
+    call qsys2.ifs_write_binary(path_name => '/tmp/IceBreak-0783.savf',line => buf, overwrite => 'REPLACE');
+    call qcmdexc ('cpyfrmstmf fromstmf(''/tmp/IceBreak-0783.savf'') tombr(''/QSYS.lib/qtemp.lib/icebreak.FILE'') mbropt(*replace) cvtdta(*none)');
+    call qcmdexc ('rstlib savlib(blueice) dev(*savf) savf(qtemp/icebreak) rstlib(iceinsttmp)');
+    call qcmdexc ('chgcmd iceinsttmp/iceinstall prdlib(iceinsttmp)');
+    call qcmdexc ('iceinsttmp/iceinstall lib(ICEBREAK) ifspath(''/sitemule/IceBreak'') adminport(7000)');     
+    call qcmdexc ('dltlib iceinsttmp');   
+end;
+
 -- https://github.com/sitemule/noxDbApi
+
+
 
 -- and use the 'sql-on-steroids.xml' config
 cl:addlible icebreak;
@@ -7,7 +23,7 @@ cl:ADDICESVR SVRID(NOXDBAPI)
     TEXT('Views as webservices') 
     SVRPORT(7007) HTTPPATH('/prj/noxdbAPI') 
     WWWDFTDOC('index.html') 
-    WEBCONFIG('webConfig-sql-on-steroids.xml'); 
+    WEBCONFIG('/prj/noxdbAPI/webConfig-sql-on-steroids.xml'); 
 cl:STRICESVR SVRID(noxDbAPI);
 
 -- Compile the noxDbAPI router code:

@@ -16,3 +16,16 @@ create or replace variable sysibmadm.selfcodes varchar(256) default '*ERROR';
 
 -- else I have to supply a list:
 create or replace variable sysibmadm.selfcodes varchar(256) default '551, 552, -551, -552, 901, -901';
+
+-- What code does this return - table john does not exist:
+drop table john;
+
+-- Ahh; that is SQLCODE -204 - now add it to the list:
+create or replace variable sysibmadm.selfcodes varchar(256) default '551, 552, -551, -552, 901, -901, -204, -407';
+
+-- let's try again:
+drop table john;
+
+-- Now it should be in the sself log:
+select * from qsys2.sql_error_log;
+

@@ -78,8 +78,13 @@ values (
 -- take the first parm as KB and the next as filename
 -- This uses the "bash" found elsewere on my gist
 select 
-    sqlxxl.word(stdout , 1) as kb ,
-    sqlxxl.word(stdout , 2) as name
+    sqlxxl.word(element , 1) as kb ,
+    sqlxxl.word(element , 2) as name
 from table (
-    sqlxxl.bash ('cd /home;du')
+    systools.split (
+        sqlxxl.bash ('cd /home;du -k') , 
+        x'25'
+    ) 
 ) a;     
+
+

@@ -82,7 +82,7 @@ sql: select * from sqlxxl.emp_full_name limit 1;
 insert into sqlxxl.emp_full_name (
   FULL_NAME, WORKDEPT, PHONENO, HIREDATE, JOB, EDLEVEL, SEX, BIRTHDATE, SALARY, BONUS, COMM
 ) values 
-  ( 'Niels N Liisberg', 'A00', '3978', '01-01-19', 'PRES', 18, 'M', null, 52750, 1000, 4220);
+  ( 'Niels N Liisberg', 'A00', '3978', '2025-01-01', 'PRES', 18, 'M', null, 52750, 1000, 4220);
 
 -- Does it work?
 select * from sqlxxl.emp_full_name order by 1 desc;
@@ -94,33 +94,52 @@ select * from sqlxxl.employee order by 1 desc;
 -- The update? 
 update sqlxxl.emp_full_name 
 set 
-    empno       = '232323', 
+    empno       = '300001', 
     full_name   = 'Niels B Liisberg', 
     workdept    = 'XXX', 
     phoneno     = '1234', 
-    hiredate    = '01-01-19', 
+    hiredate    = '2025-01-01', 
     job         = '', 
     edlevel     = 0, 
     sex         = '', 
-    birthdate   = '01-01-64', 
+    birthdate   = '1998-01-01', 
     salary      = 0, 
     bonus       = 0, 
     comm        = 0 
-where empno = '200341' ;
+where empno = '300001' ;
 
 
 -- What about the delete:
-delete from sqlxxl.emp_full_name where empno = '200341';
+delete from sqlxxl.emp_full_name where empno = '300001';
 
 -- Ofcause you can set it back by acccesing the table directly
 update sqlxxl.employee
 set    workdept = 'A00'
-where  empno  =  '200341';
+where  empno  =  '300001';
 
 -- So now we can provide a complete REST-endpoint with all: GET,PUT,POST,DELETE 
 -- With an endpoint like this:
 comment on table  sqlxxl.emp_full_name         is 'Employees with full names @Endpoint=empFullName @Method=GET,PUT,POST,DELETE';
 comment on column sqlxxl.emp_full_name.empno   is 'Find employee by employee number  @Location=PATH,1';
+
+
+-- http://my_ibm_i:7007/noxDbApi/#/sqlxxl/empFullName
+
+/* Post payload for a new employee using OPenAPI / Swagger:
+{
+  "fullName": "Peter A Summers",
+  "workdept": "A00",
+  "phoneno": "1234",
+  "hiredate": "2025-01-01",
+  "job": "MANAGER",
+  "edlevel": 0,
+  "sex": "M",
+  "birthdate": "1988-06-01",
+  "salary": 0,
+  "bonus": 0,
+  "comm": 0
+}
+*/
 
 -- And decomission the first implementation - that were a little risky:
 drop view sqlxxl.employee_view;
