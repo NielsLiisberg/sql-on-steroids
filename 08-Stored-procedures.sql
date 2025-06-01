@@ -42,7 +42,8 @@ and user_data = 'SQLXXL';
 -- I love the "for" statement - why?
 -- 1) It is structured:
 -- 2) columns are scoped within the loop aka. you don't need to declare them
--- 3) Each row from the reultset is exposed in the loop to let you do what ever  
+-- 3) Each row from the reultset is exposed in the loop to let you do what ever 
+-- 4) Be careful with the selct * - only select the columns you need 
 create or replace procedure sqlxxl.delete_joblogs  (
     in days_to_keep int default 7 
 ) 
