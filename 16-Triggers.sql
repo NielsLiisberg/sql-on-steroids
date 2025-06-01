@@ -88,9 +88,6 @@ insert into sqlxxl.emp_full_name (
 select * from sqlxxl.emp_full_name order by 1 desc;
 select * from sqlxxl.employee order by 1 desc;
 
-select * from sqlxxl.emp_full_name order by 1 desc;
-select * from sqlxxl.employee order by 1 desc;
-
 -- The update? 
 update sqlxxl.emp_full_name 
 set 

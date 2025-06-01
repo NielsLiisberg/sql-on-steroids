@@ -1,6 +1,6 @@
 ﻿-- Examples of usages of the Db2 for i temporal support
 
-create or replace table sqlxxl.departmnt(
+create or replace table sqlxxl.department(
       deptno    char(3)       not null,
       deptname  varchar(36)   not null,
       mgrno     char(6),
@@ -13,17 +13,17 @@ create or replace table sqlxxl.departmnt(
       primary key (deptno)
 );
       
-create or replace table sqlxxl.departmnt_hist like sqlxxl.departmnt;
+create or replace table sqlxxl.department_hist like sqlxxl.department;
 
 
-alter table sqlxxl.departmnt add versioning use history table sqlxxl.department_hist;
+alter table sqlxxl.department add versioning use history table sqlxxl.department_hist;
 
-select * from sqlxxl.departmnt for system_time as of current timestamp - 6 months;
+select * from sqlxxl.department for system_time as of current timestamp - 6 months;
 
 
-alter table sqlxxl.departmnt drop versioning;
+alter table sqlxxl.department drop versioning;
 
-create or replace table sqlxxl.departmnt (
+create or replace table sqlxxl.department (
       deptno    char(3)       not null,
       deptname  varchar(36)   not null,
       mgrno     char(6),
@@ -37,7 +37,8 @@ create or replace table sqlxxl.departmnt (
       primary key (deptno)
 );
 
-create or replace table sqlxxl.departmnt_hist like sqlxxl.department;
+create or replace table sqlxxl.department_hist like sqlxxl.department;
 
+alter table sqlxxl.department add versioning use history table sqlxxl.department_hist;
 
-select * from sqlxxl.departmnt for system_time as of current timestamp - 6 months;
+select * from sqlxxl.department for system_time as of current timestamp - 6 months;
