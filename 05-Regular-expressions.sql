@@ -64,3 +64,5 @@ end;
 
 call sqlxxl.drop_old_files ( 'BLUEX');    
 
+select * from qsys2.systables where table_text like 'Old%';
+

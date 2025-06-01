@@ -1,24 +1,26 @@
-﻿
--- Geospatial-Functions
--- https://www.ibm.com/docs/en/i/7.5?topic=analytics-geospatial-functions
--- https://developers.google.com/maps/documentation/urls/get-started#map-action
-
+﻿-- Geospatial-Functions
 
 -- First Add logitude and latitude to our organization table to have something to play with:
 -- Note the data type: st_point
 select * from sqlxxl.org;
 alter table sqlxxl.org add column location_point qsys2.st_point;
+select * from sqlxxl.org;
+
+-- https://www.ibm.com/docs/en/i/7.5?topic=analytics-geospatial-functions
+-- https://developers.google.com/maps/documentation/urls/get-started#map-action
 
 begin
-  update sqlxxl.org set location_point = qsys2.st_point('point(-74.1836766579507 40.72614325050191)'   ) where deptnumb = '10' ;
-  update sqlxxl.org set location_point = qsys2.st_point('point(-71.0496584723428 42.34274735720927)'   ) where deptnumb = '15' ;
-  update sqlxxl.org set location_point = qsys2.st_point('point(-77.04418137554369 38.89861126828182)'  ) where deptnumb = '20' ;
-  update sqlxxl.org set location_point = qsys2.st_point('point(-84.38992100266495 33.76071296310947)'  ) where deptnumb = '38' ;
-  update sqlxxl.org set location_point = qsys2.st_point('point(-87.63446953360999 41.8658379460295)'   ) where deptnumb = '42' ;
-  update sqlxxl.org set location_point = qsys2.st_point('point(-96.82631994829717 32.81593973346066)'  ) where deptnumb = '51' ;
-  update sqlxxl.org set location_point = qsys2.st_point('point(-122.41288137687724 37.75891424086738)' ) where deptnumb = '66' ;
-  update sqlxxl.org set location_point = qsys2.st_point('point(-104.92721873373017 39.77002763801998)' ) where deptnumb = '84' ;
+ update sqlxxl.org set location_point = qsys2.st_point('point(-74.1836766579507 40.72614325050191)') where deptnumb = '10' ;
+ update sqlxxl.org set location_point = qsys2.st_point('point(-71.0496584723428 42.34274735720927)') where deptnumb = '15' ;
+ update sqlxxl.org set location_point = qsys2.st_point('point(-77.04418137554369 38.89861126828182)') where deptnumb = '20' ;
+ update sqlxxl.org set location_point = qsys2.st_point('point(-84.38992100266495 33.76071296310947)') where deptnumb = '38' ;
+ update sqlxxl.org set location_point = qsys2.st_point('point(-87.63446953360999 41.8658379460295)') where deptnumb = '42' ;
+ update sqlxxl.org set location_point = qsys2.st_point('point(-96.82631994829717 32.81593973346066)') where deptnumb = '51' ;
+ update sqlxxl.org set location_point = qsys2.st_point('point(-122.41288137687724 37.75891424086738)') where deptnumb = '66' ;
+ update sqlxxl.org set location_point = qsys2.st_point('point(-104.92721873373017 39.77002763801998)') where deptnumb = '84' ;
 end;
+
+
 select * from sqlxxl.org;
 
 -- Create a global variable with my current location:
