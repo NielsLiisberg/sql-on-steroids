@@ -103,8 +103,10 @@ create or replace view sqlxxl.emp_full_name as (
 select *
 from sqlxxl.emp_full_name;
 
--- And to the advanced level - we can wrap API's and incelud C-code....
+-- And to the advanced level - we can wrap API's and include C-code....
 -- Use MI to generarte a RFC 4122 compiant UUID / GUID 
+-- https://www.ibm.com/docs/en/i/7.6.0?topic=interfaces-alphabetic-list-apis
+-- https://www.ibm.com/docs/en/i/7.6.0?topic=instructions-generate-universal-unique-identifier-genuuid
 call qsys2.ifs_write(
     path_name => '/tmp/main.c' , 
     file_ccsid => 1208, 
