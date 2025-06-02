@@ -91,7 +91,7 @@ select * from sqlxxl.department;
 create or replace view sqlxxl.department_view  as 
     select * from sqlxxl.department;
 comment on table  sqlxxl.department_view         is 'Departments  @Endpoint=department @Method=GET';
-comment on column sqlxxl.department_view.empno   is 'Find department by  department number  @Location=PATH,1';
+comment on column sqlxxl.department_view.deptno  is 'Find department by  department number  @Location=PATH,1';
 
 -- Does it work? 
 -- http://my_ibm_i:7007/noxDbApi/#/sqlxxl/department
