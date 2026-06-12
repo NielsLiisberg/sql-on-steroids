@@ -21,6 +21,7 @@ With the time given I will cover as much as I can of:
 - JSON
 - XML
 - Service consuming
+- AI - use AI as a Db2 component
 - SELF SQL Exceptions Logging facility
 - SQL Services
 - RESTfull
