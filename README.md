@@ -41,4 +41,4 @@ This repo is distributed on an "as is" basis, without warranties or conditions o
 
 Have fun 
 
-(C) Niels Liisberg 2024
+(C) Niels Liisberg 2026
