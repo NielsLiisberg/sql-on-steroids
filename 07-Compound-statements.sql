@@ -1,6 +1,6 @@
 -- https://www.ibm.com/docs/en/i/7.3?topic=pl-compound-statement
 
--- A sigle statment
+-- A single statment
 call systools.lprintf ('Hello world');
 
 -- This is a compund statement - a series of statements sourrounded by "begin" and "end";
@@ -8,7 +8,7 @@ begin
     call systools.lprintf ('Hello world');
 end;
 
--- Note what happesn in the joblog....
+-- Note what happens in the joblog....
 select message_text 
 from table (qsys2.joblog_info ('*')) 
 order by ordinal_position desc;

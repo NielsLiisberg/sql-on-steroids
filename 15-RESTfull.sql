@@ -13,7 +13,7 @@ begin
     call qcmdexc ('dltlib iceinsttmp');   
 end;
 
--- https://github.com/sitemule/noxDbApi
+-- https://github.com/sitemule/noxdbapi
 
 
 
@@ -21,13 +21,13 @@ end;
 cl:addlible icebreak;
 cl:ADDICESVR SVRID(NOXDBAPI) 
     TEXT('Views as webservices') 
-    SVRPORT(7007) HTTPPATH('/prj/noxdbAPI') 
+    SVRPORT(7007) HTTPPATH('/prj/noxdbapi') 
     WWWDFTDOC('index.html') 
-    WEBCONFIG('/prj/noxdbAPI/webConfig-sql-on-steroids.xml'); 
+    WEBCONFIG('/prj/noxdbapi/webConfig-sql-on-steroids.xml'); 
 cl:STRICESVR SVRID(noxDbAPI);
 
 -- Compile the noxDbAPI router code:
-cl:CRTICEPGM STMF('/prj/noxDbAPI/noxDbAPI.rpgle') SVRID(noxDbAPI);
+cl:CRTICEPGM STMF('/prj/noxdbapi/noxdbapi.rpgle') SVRID(noxDbAPI);
 
 -- My favorite "goto guy"
 select * from qsys2.services_info;
@@ -48,7 +48,7 @@ comment on table  sqlxxl.services_info               is 'Services info view @End
 comment on column sqlxxl.services_info.service_name  is 'Find services by name @Location=PATH,1';
 
 -- Does it work? 
--- http://my_ibm_i:7007/noxDbApi/ 
+-- http://my_ibm_i:7007/noxdbapi 
 
 -- Now our employee table: noxDbApi will only expose views for safty reasons:
 create or replace view sqlxxl.employee_view  as 
@@ -57,7 +57,7 @@ comment on table  sqlxxl.employee_view         is 'Employees  @Endpoint=employee
 comment on column sqlxxl.employee_view.empno   is 'Find employee employee number  @Location=PATH,1';
 
 -- Does it work? 
--- http://my_ibm_i:7007/noxDbApi/#/sqlxxl/employee
+-- http://my_ibm_i:7007/noxdbapi/#/sqlxxl/employee
 
 
 
@@ -94,7 +94,7 @@ comment on table  sqlxxl.department_view         is 'Departments  @Endpoint=depa
 comment on column sqlxxl.department_view.deptno  is 'Find department by  department number  @Location=PATH,1';
 
 -- Does it work? 
--- http://my_ibm_i:7007/noxDbApi/#/sqlxxl/department
+-- http://my_ibm_i:7007/noxdbapi/#/sqlxxl/department
 
 
 -- Let's retry with a real department number A00: 
@@ -121,6 +121,9 @@ select * from sqlxxl.emp_full_name;
 -- With an endpoint like this:
 comment on table  sqlxxl.emp_full_name         is 'Employees with full names @Endpoint=empFullName @Method=GET,PUT';
 comment on column sqlxxl.emp_full_name.empno   is 'Find employee by employee number  @Location=PATH,1';
+
+-- http://my_ibm_i:7007/noxdbapi/
+
 
 -- And note the methods in swagger / openAPI 
 select * from sqlxxl.sysviews;

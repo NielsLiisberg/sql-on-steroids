@@ -120,7 +120,7 @@ comment on table  sqlxxl.emp_full_name         is 'Employees with full names @En
 comment on column sqlxxl.emp_full_name.empno   is 'Find employee by employee number  @Location=PATH,1';
 
 
--- http://my_ibm_i:7007/noxDbApi/#/sqlxxl/empFullName
+-- http://my_ibm_i:7007/noxdbapi/#/sqlxxl/empFullName
 
 /* Post payload for a new employee using OPenAPI / Swagger:
 {

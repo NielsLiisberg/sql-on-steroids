@@ -10,6 +10,7 @@ create or replace  table sqlxxl.account_transactions (
     transaction_Date date,
     amount decimal ( 15,2) 
 );
+
 insert into sqlxxl.account_transactions values 
 (  1 , 1 , '2024-06-01' , 1123),
 (  1 , 2 , '2024-07-02' , 1234),

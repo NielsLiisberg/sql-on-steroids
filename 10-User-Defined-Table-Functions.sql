@@ -46,5 +46,5 @@ where home_directory > ' ';
 -- This is also cool :)
 -- first:
 -- yum install tree
-select line from table (sqlxxl.bash_line('cd /home;/QOpenSys/pkgs/bin/tree -d'));
+select line from table (sqlxxl.bash_line('cd /home/nli;/QOpenSys/pkgs/bin/tree -d'));
 

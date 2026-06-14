@@ -27,6 +27,7 @@ select * from sqlxxl.org;
 create or replace variable sqlxxl.my_location qsys2.st_point;
 set sqlxxl.my_location = qsys2.st_point('point(12.491351574215194 55.90093990665238)');
 
+
 -- The binary value - not that readable:
 values sqlxxl.my_location;
 
